@@ -7,8 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static POM.Data.Dao.DaoUtils.Utils.getUsersCount;
-import static POM.Data.Dao.DaoUtils.Utils.insertWithCustomCommit;
+import static POM.Data.Dao.DaoUtils.Utils.*;
 
 public class UserDao {
 
@@ -36,11 +35,9 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            assert stmt != null;
-            stmt.close();
+            closeStatement(stmt);
 
-            assert rs != null;
-            rs.close();
+            closeResultSet(rs);
         }
         return userList;
     }
@@ -79,8 +76,7 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            assert pstmt != null;
-            pstmt.close();
+            closePreparedStatement(pstmt);
         }
     }
 
@@ -97,8 +93,7 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            assert pstmt != null;
-            pstmt.close();
+            closePreparedStatement(pstmt);
         }
     }
 

@@ -25,23 +25,27 @@ public class Utils {
             System.out.println(e.getMessage());
         }
         finally {
-            assert pstmt != null;
-            pstmt.close();
+            closePreparedStatement(pstmt);
         }
     }
 
-    public static int getUsersCount() {
+    public static int getUsersCount() throws SQLException {
         String query = "select * from students";
         int usersCount = 0;
+        Statement stmt = null;
+        ResultSet rs = null;
         try(Connection conn = SQLJDBCUtil.getConnection()) {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 usersCount++;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            closeStatement(stmt);
+            closeResultSet(rs);
         }
         return usersCount;
     }
@@ -68,9 +72,23 @@ public class Utils {
             System.out.println(e.getMessage());
         }
         finally {
-            assert pstmt != null;
-            pstmt.close();
+            closePreparedStatement(pstmt);
         }
         return exactUser;
+    }
+
+    public static void closeResultSet(ResultSet rs) throws SQLException {
+        assert rs != null;
+        rs.close();
+    }
+
+    public static void closePreparedStatement(PreparedStatement pstmt) throws SQLException {
+        assert pstmt != null;
+        pstmt.close();
+    }
+
+    public static void closeStatement(Statement stmt) throws SQLException {
+        assert stmt != null;
+        stmt.close();
     }
 }
