@@ -4,7 +4,6 @@ import POM.Data.Model.User;
 import org.testng.annotations.DataProvider;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import static POM.Data.Dao.UserDao.getUsersInfo;
 public class UserDataProvider {
 
     @DataProvider(name = "userDataProvider")
-    public static Object[][] userDataProvider() throws SQLException {
+    public static Object[][] userDataProvider(){
         List<User> userList;
         Object[][] userData = null;
         try {
