@@ -1,4 +1,4 @@
-package POM.Data.Dao;
+package POM.Data.Dao.DaoUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +21,6 @@ public class SQLJDBCUtil {
                    password = props.getProperty("password");
 
             conn = DriverManager.getConnection(url, user, password);
-            System.out.printf("\nConnected to database %s Successfully \n", conn.getCatalog());
 
         }catch (IOException e ){
             System.out.println(e.getMessage());

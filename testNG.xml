@@ -3,9 +3,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Forms Test Using SQL">
-    <test name="Forms Test">
+    <test name="Forms Test" parallel="methods" thread-count="2">
         <classes>
-            <class name="FormsTest"/>
+            <class name="QueryingTest"/>
         </classes>
     </test>
 </suite>
